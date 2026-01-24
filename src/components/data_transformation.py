@@ -83,8 +83,8 @@ class DataTransformation:
             )
 
             return (
-                train_df, test_df,
-                self.data_transformation_config.preprocessor_obj_file_path
+                input_feature_train_arr,
+                input_feature_test_arr
             )
 
         except Exception as e:

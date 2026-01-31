@@ -36,7 +36,30 @@ class ModelTrainer:
                 "AdaBoost": AdaBoostRegressor()
             }
 
-            model_report = evaluate_models(X_train, y_train, X_test, y_test, models)
+            params = {
+                "Random Forest": {
+                    'n_estimators': [50, 100, 200],
+                    'max_depth': [None, 10, 20],
+                },
+                "Decision Tree": {
+                    'max_depth': [None, 10, 20],
+                    'min_samples_split': [2, 5, 10],
+                },
+                "K-Neighbors": {
+                    'n_neighbors': [3, 5, 7],
+                    'weights': ['uniform', 'distance'],
+                },
+                "Gradient Boosting": {
+                    'n_estimators': [50, 100, 200],
+                    'learning_rate': [0.01, 0.1, 0.2],
+                },
+                "AdaBoost": {
+                    'n_estimators': [50, 100, 200],
+                    'learning_rate': [0.01, 0.1, 0.2],
+                }
+            }
+
+            model_report = evaluate_models(X_train, y_train, X_test, y_test, models, params = params)
 
             for model_name, model in models.items():
                 logging.info(f"Training {model_name}")
